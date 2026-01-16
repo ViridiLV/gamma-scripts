@@ -66,6 +66,9 @@ install() {
     install_create_gamma_cli_config
     install_full_install
     install_update_check
+    local end_time
+    end_time="$(date +%s)"
+    log "Main: action finished in $((end_time - START_TIME)) seconds"
 }
 install_init() {
     source /etc/os-release
@@ -143,6 +146,9 @@ setup() {
     setup_prefix_configure
     setup_prefix_verify
     log "setup: processing finished"
+    local end_time
+    end_time="$(date +%s)"
+    log "Main: action finished in $((end_time - START_TIME)) seconds"
 }
 setup_runner_install() {
     log "runner_INSTALL: Checking if the runner exists"
@@ -335,10 +341,8 @@ main() {
     log "Main: script started (${SCRIPT_NAME})"
     greet
     select
-    local end_time
-    end_time="$(date +%s)"
-    log "Main: script finished in $((end_time - START_TIME)) seconds"
-    log "Script end. Input anything to exit. \o"
+    
+    log "Main: script end. Input anything to exit. \o"
     read -r user_input && exit
 }
 main "$@"
