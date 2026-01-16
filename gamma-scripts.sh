@@ -304,7 +304,8 @@ die() {
     read -r user_input && exit 1
 }
 die_exit() {
-
+    log "Exitting due to user input selection - Exit"
+    log "Bye!"
 }
 greet() {
     log "Stalker GAMMA community install/setup shell scripts"
@@ -313,10 +314,12 @@ greet() {
     log "https://github.com/ViridiLV/G.A.M.M.A-Community-Linux-Install-Setup-shell-scripts"
 }
 select() {
+    log "-------------------------------------------------"
     log "Possible actions:"
     log "[1] - Install game files with stalker-gamma-cli"
     log "[2] - Setup flatpak GAMMA bottle"
     log "[3] - Exit"
+    log "-------------------------------------------------"
     user_input_select=""
     selected=false
     while [ selected==false ]; do
