@@ -297,6 +297,9 @@ die() {
     log "Press any key to close this program."
     read -r user_input && exit 1
 }
+die_exit() {
+
+}
 greet() {
     log "Stalker GAMMA community install/setup shell scripts"
     log "version: [$SCRIPT_VERSION]"
@@ -310,13 +313,21 @@ select() {
     log "[3] - Exit"
     user_input_select=""
     selected=false
-    while [ ! selected ]; do
+    while [ selected==false ]; do
         log "Please select your action:"
         read -p user_input
         if user_input_select==1; then
             install_init
             install
             selected=true
+        elif user_input_select==2; then
+            setup_init
+            setup
+            selected=true
+        elif user_input_select==3; then
+            die_exit
+        else
+            log red "[${user_input_select}]Not a valid input!"
         fi
     done
 }
