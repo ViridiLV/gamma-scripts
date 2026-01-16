@@ -299,11 +299,14 @@ die() {
 }
 greet() {
     log "Stalker GAMMA community install/setup shell scripts"
-    log "version '$SCRIPT_VERSION'"
+    log "version: [$SCRIPT_VERSION]"
     log "For ducumentation see:"
     log "https://github.com/ViridiLV/G.A.M.M.A-Community-Linux-Install-Setup-shell-scripts"
 }
 select() {
+    log "Possible actions:"
+    log "[1] - Install game files with stalker-gamma-cli"
+    log "[2] - Setup flatpak GAMMA bottle"
     log "Please select your action:"
     while [  ]; do
         
