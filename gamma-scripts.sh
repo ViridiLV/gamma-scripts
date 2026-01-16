@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 SCRIPT_VERSION="1.0"
-WORK_DIR="$(pwd)"
-cd $WORK_DIR
-cd ..
 GAMMA_DIR=$(pwd)
 LOG_FILE_NAME=gamma-scripts.log
-LOG_FOLDER="$WORK_DIR/logs"
+LOG_FOLDER="$GAMMA_DIR/logs"
 LOG_FILE="$LOG_FOLDER/$LOG_FILE_NAME"
 set -Eeuo pipefail
 SCRIPT_NAME="$(basename "$0")"
@@ -58,7 +55,7 @@ log() {
 }
 install_init() {
     source /etc/os-release
-    cd $WORK_DIR
+    cd $GAMMA_DIR
     if [ -f logs/$LOG_FILE_NAME ]; then
         echo "Purging old log."
         cd logs
@@ -80,7 +77,7 @@ install_init() {
 }
 setup_init() {
     source /etc/os-release
-    cd $WORK_DIR
+    cd $GAMMA_DIR
     if [ -f logs/$LOG_FILE_NAME ]; then
         echo "Purging old log."
         cd logs
@@ -90,7 +87,7 @@ setup_init() {
     log "Init: starting initialization"
     log cyan "Init: Work variables:"
     log cyan "Init: Script version is [$SCRIPT_VERSION]"
-    log cyan "Init: [WORK_DIR] is [${WORK_DIR}]"
+    log cyan "Init: [GAMMA_DIR] is [${GAMMA_DIR}]"
     log cyan "Init: [LOG_FILE] is [${LOG_FILE}]"
     log cyan "Init: [BOTTLE_NAME] is [${BOTTLE_NAME}]"
     log cyan "Init: [LAUNCHER_NAME] is [${LAUNCHER_NAME}]"
@@ -199,7 +196,6 @@ setup_bottles_check_if_inital_setup_done() {
 }
 setup_bottles_get_dll() {
     log "bottles_get_dll: Get some older .dll in case Bottles auto-download-latest was broken"
-    
     cd $BOTTLES_DXVK_PATH
     log "Checking if Bottles failed to download a DXVK version"
     if ! ls -d dxvk*/ >/dev/null 2>&1; then
@@ -244,23 +240,28 @@ setup_bottles_get_dll() {
     fi
 }
 install_update_check() {
+    cd $GAMMA_DIR
     log cyan "update_check: Commencing update check for verification"
     ./stalker-gamma*.AppImage update check > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
 }
 install_full_install() {
+    cd $GAMMA_DIR
     log cyan "install_full_install: Commencing full install"
     ./stalker-gamma*.AppImage full-install > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
 }
 install_create_gamma_cli_config() {
+    cd $GAMMA_DIR
     log cyan "install_create_gamma_cli_config: Making a config in the stalker-gamma-cli"
     ./stalker-gamma*.AppImage config create --anomaly "$ANOMALY_FOLDER" --gamma "$GAMMA_FOLDER" --cache cache --download-threads "$DOWNLOAD_THREADS" > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
     log cyan "install_create_gamma_cli_config: done"
 }
 install_check_stalker_gamma_cli_version() {
+    cd $GAMMA_DIR
     log cyan "install_check_stalker_gamma_cli_version: Check version:"
     ./stalker-gamma.AppImage --version > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
 }
 install_get_stalker_gamma_cli() {
+    cd $GAMMA_DIR
     log cyan "install_get_stalker_gamma_cli: Downloading latest release of stalker-gamma-cli"
     wget -O - https://api.github.com/repos/FaithBeam/stalker-gamma-cli/releases?per_page=100 \
         | jq -r --arg target "$TARGET" 'first(.[].assets[] | .browser_download_url | select(contains("linux") and contains("x64") and contains($target)))' \
@@ -341,6 +342,7 @@ user_chooses() {
     done
 }
 main() {
+    cd $GAMMA_DIR
     # Making sure LOG_FOLDER exists.
     mkdir -p $LOG_FOLDER
     log "Main: script started (${SCRIPT_NAME})"
