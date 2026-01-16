@@ -4,8 +4,9 @@ WORK_DIR="$(pwd)"
 cd $WORK_DIR
 cd ..
 GAMMA_DIR=$(pwd)
-LOG_FILE_NAME=setup.log
-LOG_FILE="$WORK_DIR/logs/$LOG_FILE_NAME"
+LOG_FILE_NAME=install.log
+LOG_FOLDER="$WORK_DIR/logs"
+LOG_FILE="$LOG_FOLDER/$LOG_FILE_NAME"
 set -Eeuo pipefail
 # ---- User vars ----
 WINEFIX=true
@@ -236,6 +237,9 @@ bottles_get_dll() {
 }
 # ---- Main entry point ----
 main() {
+    # Making sure LOG_FOLDER exists.
+    mkdir -p $LOG_FOLDER
+
     log "Main: script started (${SCRIPT_NAME})"
     init
     work

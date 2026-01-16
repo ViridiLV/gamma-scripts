@@ -5,7 +5,8 @@ cd $WORK_DIR
 cd ..
 GAMMA_DIR=$(pwd)
 LOG_FILE_NAME=install.log
-LOG_FILE="$WORK_DIR/logs/$LOG_FILE_NAME"
+LOG_FOLDER="$WORK_DIR/logs"
+LOG_FILE="$LOG_FOLDER/$LOG_FILE_NAME"
 set -Eeuo pipefail
 SCRIPT_NAME="$(basename "$0")"
 START_TIME="$(date +%s)"
@@ -95,6 +96,9 @@ get_stalker_gamma_cli() {
     && chmod +x stalker-gamma.AppImage > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
 }
 main() {
+    # Making sure LOG_FOLDER exists.
+    mkdir -p $LOG_FOLDER
+
     log "Main: script started (${SCRIPT_NAME})"
     init
     work
