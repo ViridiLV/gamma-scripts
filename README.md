@@ -20,7 +20,9 @@ Version numbers inside the scripts are informative for troubleshooting logs.
 1.1 Open a terminal instance in the main directory where your gamma and anomaly files will be.
 1.2. Download and make the script executable:
 
-```wget https://raw.githubusercontent.com/ViridiLV/G.A.M.M.A-Community-Linux-Install-Setup-shell-scripts/refs/heads/main/gamma-scripts.sh && chmod -x gamma-scripts.sh```
+```wget https://raw.githubusercontent.com/ViridiLV/G.A.M.M.A-Community-Linux-Install-Setup-shell-scripts/refs/heads/main/gamma-scripts.sh ```
+1.3. Make it executable
+```chmod -x gamma-scripts.sh```
 
 
 
