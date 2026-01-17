@@ -40,6 +40,7 @@ wget https://raw.githubusercontent.com/ViridiLV/gamma-scripts/refs/heads/main/ga
 chmod -x gamma-scripts.sh
 ```
 1.4. Run the script
+
  a) 
  ```
  bash gamma-scripts.sh
