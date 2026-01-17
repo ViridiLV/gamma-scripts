@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 SCRIPT_VERSION="1.1"
-GAMMA_DIR=$(pwd)
-LOG_FILE_NAME=gamma-scripts.log
+GAMMA_DIR="$(pwd)/resources"
+LOG_FILE_NAME="gamma-scripts$(date --utc +%Y-%m-%dT%H:%M:%S%Z).log"
 LOG_FOLDER="$GAMMA_DIR/logs"
 LOG_FILE="$LOG_FOLDER/$LOG_FILE_NAME"
 set -Eeuo pipefail
@@ -11,16 +11,17 @@ START_TIME="$(date +%s)"
 DOWNLOAD_THREADS="2"
 GAMMA_FOLDER="GAMMA"
 ANOMALY_FOLDER="Anomaly"
+CACHE_FOLDER="cache"
 WINEFIX=true
 BOTTLE_NAME="StalkerGAMMA"
 LAUNCHER_NAME="ModOrganizer"
-# ---- For stalker-gamma-cli github acess ----
-MAJOR_VERSION=1
-TARGET="/download/$MAJOR_VERSION."
 # ---- Global vars ----
 SCRIPT_NAME="$(basename "$0")"
 START_TIME="$(date +%s)"
 RUNNER_NAME="ge-proton9-20"
+STALKER_GAMMA_CLI_URL="https://github.com/FaithBeam/stalker-gamma-cli/releases/latest/download/stalker-gamma+linux.x64.AppImage"
+PROTON_GE_URL="https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-20/GE-Proton9-20.tar.gz"
+PROTON_GE_NAME="GE-Proton9-20" # fix this latter with name-agnostic code
 BOTTLES_CHECK_PATH="/home/$USER/.var/app/com.usebottles.bottles"
 BOTTLES_PREFIX_PATH="/home/$USER/.var/app/com.usebottles.bottles/data/bottles/bottles/$BOTTLE_NAME"
 BOTTLES_RUNNER_PATH="/home/$USER/.var/app/com.usebottles.bottles/data/bottles/runners/"
@@ -31,45 +32,18 @@ BOTTLES_LFLEX_PATH="/home/$USER/.var/app/com.usebottles.bottles/data/bottles/lat
 BOTTLES_RUNNER_WINE="$BOTTLES_RUNNER_PATH/$RUNNER_NAME/files/bin/wine"
 BOTTLES_RUNNER_WINETRICKS="$BOTTLES_RUNNER_PATH/$RUNNER_NAME/protonfixes/winetricks"
 TROUBLESOME_DISTROS=(bobrkurwa goyim_os)
-log() {
-    local color_reset="\033[0m"
-    local color=""
-    local message=""
-    case "${1:-}" in
-        red)    color="\033[31m"; shift ;;
-        green)  color="\033[32m"; shift ;;
-        yellow) color="\033[33m"; shift ;;
-        blue)   color="\033[34m"; shift ;;
-        magenta)color="\033[35m"; shift ;;
-        cyan)   color="\033[36m"; shift ;;
-    esac
-    message="[$(date '+%Y-%m-%d %H:%M:%S')] $*"
-    # Print to terminal with color
-    if [ -n "$color" ]; then
-        echo -e "${color}${message}${color_reset}"
-    else
-        echo "$message"
-    fi
-    # Log the message without color codes
-    echo -e "$message" >> "$LOG_FILE"
-}
+
 install_init() {
     source /etc/os-release
+
     cd $GAMMA_DIR
-    if [ -f logs/$LOG_FILE_NAME ]; then
-        echo "Purging old log."
-        cd logs
-        rm -v $LOG_FILE_NAME
-        cd ..
-    fi
+
     log "install_Init: starting initialization"
     log cyan "install_Init: Work variables:"
     log cyan "install_Init Script version is [$SCRIPT_VERSION]"
     log cyan "install_Init: [DOWNLOAD_THREADS] is [${DOWNLOAD_THREADS}]"
     log cyan "install_Init: [GAMMA_FOLDER] is [${GAMMA_FOLDER}]"
     log cyan "install_Init: [ANOMALY_FOLDER] is [${ANOMALY_FOLDER}]"
-    log cyan "install_Init: [MAJOR_VERSION] is [${MAJOR_VERSION}]"
-    log cyan "install_Init: [TARGET] is [${TARGET}]"
     log cyan "install_Init: [LOG_FILE] is [${LOG_FILE}]"
     log cyan "install_Init: [GAMMA_DIR] is [${GAMMA_DIR}]"
     log cyan "install_Init: Distro info:[ID] is [${ID}]"
@@ -77,13 +51,9 @@ install_init() {
 }
 setup_init() {
     source /etc/os-release
+   
     cd $GAMMA_DIR
-    if [ -f logs/$LOG_FILE_NAME ]; then
-        echo "Purging old log."
-        cd logs
-        rm -v $LOG_FILE_NAME
-        cd ..
-    fi
+
     log "setup_init: starting initialization"
     log cyan "setup_init: Work variables:"
     log cyan "setup_init: Script version is [$SCRIPT_VERSION]"
@@ -127,10 +97,10 @@ setup_runner_install() {
         log red "No runner '$RUNNER_NAME' detected!"
         log yellow "runner_install: Installing proton in Bottles runners folder"
         cd $BOTTLES_RUNNER_PATH
-        wget https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-20/GE-Proton9-20.tar.gz
-        tar -xvzf GE-Proton9-20.tar.gz
-        mv GE-Proton9-20 ge-proton9-20
-        rm -v GE-Proton9-20.tar.gz
+        wget $PROTON_GE_URL -O $PROTON_GE_NAME.tar.gz # TODO: Name-agnostic code with regex or someting
+        tar -xvzf $PROTON_GE_NAME.tar.gz # TODO: Name-agnostic code with regex or someting
+        mv $PROTON_GE_NAME ge-proton9-20 # TODO: Name-agnostic code with regex or someting
+        rm -v $PROTON_GE_NAME.tar.gz # TODO: Name-agnostic code with regex or someting
         log green "Runner '$RUNNER_NAME' installed!"
     fi
 }
@@ -253,27 +223,24 @@ install_full_install() {
 install_create_gamma_cli_config() {
     cd $GAMMA_DIR
     log cyan "install_create_gamma_cli_config: Making a config in the stalker-gamma-cli"
-    ./stalker-gamma*.AppImage config create --anomaly "$ANOMALY_FOLDER" --gamma "$GAMMA_FOLDER" --cache cache --download-threads "$DOWNLOAD_THREADS" > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
+    ./stalker-gamma*.AppImage config create --anomaly "$ANOMALY_FOLDER" --gamma "$GAMMA_FOLDER" --cache "$CACHE_FOLDER" --download-threads "$DOWNLOAD_THREADS" > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
     log cyan "install_create_gamma_cli_config: done"
 }
 install_check_stalker_gamma_cli_version() {
     cd $GAMMA_DIR
     log cyan "install_check_stalker_gamma_cli_version: Check version:"
-    ./stalker-gamma.AppImage --version > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
+    ./stalker-gamma.AppImage --version > >(tee> >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2) -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
 }
 install_get_stalker_gamma_cli() {
     cd $GAMMA_DIR
+
     log cyan "install_get_stalker_gamma_cli: Downloading latest release of stalker-gamma-cli"
-    wget -O - https://api.github.com/repos/FaithBeam/stalker-gamma-cli/releases?per_page=100 \
-        | jq -r --arg target "$TARGET" 'first(.[].assets[] | .browser_download_url | select(contains("linux") and contains("x64") and contains($target)))' \
-        | wget -i - -O stalker-gamma.AppImage \
-    && chmod +x stalker-gamma.AppImage > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
+
+    wget $STALKER_GAMMA_CLI_URL -O stalker-gamma.AppImage
+
+    chmod +x stalker-gamma.AppImage > >(tee -a "$LOG_FILE") 2> >(tee -a "$LOG_FILE" >&2)
 }
-die() {
-    log red "ERROR: $*"
-    log "Press any key to close this program."
-    read -r user_input && exit 1
-}
+
 install() {
     cd $GAMMA_DIR
     install_get_stalker_gamma_cli
@@ -304,11 +271,7 @@ setup() {
     log "Main: action finished in $((end_time - START_TIME)) seconds"
     user_chooses
 }
-die_exit() {
-    log "Exitting due to user input selection - Exit"
-    log "Bye!"
-    exit 1
-}
+
 greet() {
     log "Stalker GAMMA community install/setup shell scripts"
     log "version: [$SCRIPT_VERSION]"
@@ -344,7 +307,46 @@ user_chooses() {
         fi
     done
 }
+
+# ---- Utility functions ----
+log() {
+    local color_reset="\033[0m"
+    local color=""
+    local message=""
+    case "${1:-}" in
+        red)    color="\033[31m"; shift ;;
+        green)  color="\033[32m"; shift ;;
+        yellow) color="\033[33m"; shift ;;
+        blue)   color="\033[34m"; shift ;;
+        magenta)color="\033[35m"; shift ;;
+        cyan)   color="\033[36m"; shift ;;
+    esac
+    message="[$(date '+%Y-%m-%d %H:%M:%S')] $*"
+    # Print to terminal with color
+    if [ -n "$color" ]; then
+        echo -e "${color}${message}${color_reset}"
+    else
+        echo "$message"
+    fi
+    # Log the message without color codes
+    echo -e "$message" >> "$LOG_FILE"
+}
+
+die_exit() {
+    log "Exitting due to user input selection - Exit"
+    log "Bye!"
+    exit 1
+}
+
+die() {
+    log red "ERROR: $*"
+    log "Press any key to close this program."
+    read -r user_input && exit 1
+}
+
+
 main() {
+    mkdir -p $GAMMA_DIR
     cd $GAMMA_DIR
     # Making sure LOG_FOLDER exists.
     mkdir -p $LOG_FOLDER
