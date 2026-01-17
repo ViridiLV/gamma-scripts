@@ -52,6 +52,16 @@ chmod -x gamma-scripts.sh
   The script will download latest release from [https://github.com/FaithBeam/stalker-gamma-cli] 
   
   After that the script will proceed to install the game using it. 
+## Step 3 - Set up the game
 
+Step 2 only lets you obtain game files, as if you installed the game on Windows, however this does not enable you to play GAMMA on Linux.
+
+To play GAMMA on Linux you need to set up a working wine/proton compability layer with the needed dependencies.
+
+This process often brings in a lot of user error and difficulty for newcomers.
+
+The setup script aims to streamline this  process by scripting the set up of flatpak Bottles and making a bottle with dependencies for you with as little amount of user input as possible.
+
+3.1 With the script open and idle, type in the number that corresponds the option "setup GAMMA", then press Enter.
 
 ***Work in progress***
