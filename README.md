@@ -45,7 +45,11 @@ chmod -x gamma-scripts.sh
  bash gamma-scripts.sh
  ```
  b) via "Open in  terminal" of your distro's GUI file manager right click/open menu
+## Step 2 - Installing the game
 
+ - **INSTALL** - to install the game, type in the number that corresponds the option "Install game" in the terminal output of the `gamma-scipts.sh`, then press Enter.
+
+  The script will download latest release from [[github.com/Mord3rca/gamma-launcher]([https://github.com/FaithBeam/stalker-gamma-cli] and automatically proceed with the installation of game files.
 
 
 ***Work in progress***
