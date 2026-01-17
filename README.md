@@ -10,7 +10,9 @@ Includes a step-by-step guide.
 For scripts to work need libraries/packages that it uses.
 
 For Ubuntu/Debian systems:
-```apt install flatpak wget tar fq findutils```
+```
+apt install flatpak wget tar fq findutils
+```
 
 For Others... *to be included*
 ## Step 1 - getting the scripts
@@ -22,11 +24,21 @@ Version numbers inside the scripts are informative for troubleshooting logs.
 
 1.2. Download and make the script executable:
 
-```wget https://raw.githubusercontent.com/ViridiLV/gamma-scripts/refs/heads/main/gamma-scripts.sh ```
+```
+wget https://raw.githubusercontent.com/ViridiLV/gamma-scripts/refs/heads/main/gamma-scripts.sh
+```
 
-1.3. Make it executable
+1.3. Make it executable(optional if you choose to execute from already open terminal)
 
-```chmod -x gamma-scripts.sh```
+```
+chmod -x gamma-scripts.sh
+```
+1.4. Run the script
+ a) 
+ ```
+ bash gamma-scripts.sh
+ ```
+ b) via "Open in  terminal" of your distro's GUI file manager right click/open menu
 
 
 
