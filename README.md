@@ -5,7 +5,7 @@ Community made scripts made to semi-automatically install gamma and  set up a bo
 Includes a step-by-step guide.
 
 # Guide
-## Step 0 - obtaining dependencies to run the scripts
+## Step 0 - Obtaining dependencies to run the scripts
 
 For scripts to work need libraries/packages that it uses.
 
