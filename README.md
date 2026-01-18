@@ -23,12 +23,12 @@ Version numbers inside the scripts are informative for troubleshooting logs.
 
 - **1.1** Open a terminal instance in the main directory where your gamma and anomaly files will be.
 
-Tehn make a folder and `cd` into it in your terminal.
+  Then make a folder and `cd` into it in your terminal.
 
-For example:
-```
-cd /home/$USER/Games/GAMMA
-```
+  For example:
+  ```
+  cd /home/$USER/Games/GAMMA
+  ```
 - **1.2.** Download the script file:
 
 ```
