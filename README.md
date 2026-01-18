@@ -100,7 +100,7 @@ The setup script aims to streamline this  process by scripting the set up of fla
       
        <img alt="image" src="https://github.com/ViridiLV/gamma-scripts/blob/main/Documentation/Pictures/bottles_init_finish.png" />
   
-    - Once initial setup is done, Press `Start susing bottles`, press `X` to close bottles, then select the script terminal window and enter anything to continue
+    - Once initial setup is done, Press `Start using Bottles`, press `X` to close bottles, then select the script terminal window and enter anything to continue
   
   - **3.5** When prompted, press `OK` on the small pop up screens.
 
