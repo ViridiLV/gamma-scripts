@@ -50,13 +50,13 @@ Version numbers inside the scripts are informative for troubleshooting logs.
     
 ## Step 2 - Installing the game
 
- - **INSTALL** - to install the game, type in the number that corresponds the option "Install game", then press Enter.
+ - **INSTALL** - to install the game, type in the number that corresponds to the option "Install game", then press Enter.
 
   The script will download latest release from [https://github.com/FaithBeam/stalker-gamma-cli] 
   
   After that the script will proceed to install the game using it. 
   
-  The folder structure of you gamma main folder should look like this:
+  The folder structure of your chosen GAMMA main folder should look like this:
   ```
   ~/Games/GAMMA$ tree -L 1
   .
