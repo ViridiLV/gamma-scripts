@@ -76,27 +76,27 @@ This process often brings in a lot of user error and difficulty for newcomers.
 
 The setup script aims to streamline this  process by scripting the set up of flatpak Bottles and making a bottle with dependencies for you with as little amount of user input as possible.
 
-3.1 With the script open and idle, type in the number that corresponds the option "setup GAMMA", then press Enter.
-
-3.2 If you don't have flatpak bottles installed, the script will attempt to install flatpak bottles.
-
-It will ask permission to do so, simply type y and hit enter to allow the installation of Bottles.
-
-3.3.If Bottles does not have filesystem=host access, it may prompt you to input sudo password. 
-
-Not having acess to files game files may cause missing QT.dll errors later.
-
-3.4 Then, if the bottles just got installed and was not installed and set up previously, the script will prompt you to open Bottles and complete initial setup.
-
-Once done, press X to close bottles, then select the script terminal window and enter anything to continue
-
-3.5 When prompted, press ok on the small pop up screens.
-
-You may have a couple of small pop up windows saying ".dll registered succesfully".
-
-Simply press OK, or hit enter to continue.
-
-3.6. The script will return to the action selection screen, at this point the bottle is set up and you can launch ModOrganizer from the StalkerGAMMA bottle in bottles to start playing the game.
+  - **3.1** With the script open and idle, type in the number that corresponds the option "setup GAMMA", then press Enter.
+  
+  - **3.2** If you don't have flatpak bottles installed, the script will attempt to install flatpak bottles.
+  
+  It will ask permission to do so, simply type `y` and hit enter to allow the installation of Bottles.
+  
+  - **3.3.** If Bottles does not have `filesystem=host` access, it may prompt you to input sudo password. 
+  
+    Not having flatpak permission acess to game files may cause missing QT.dll errors later.
+  
+  - **3.4** Then, if the bottles just got installed and was not installed and set up previously, the script will **prompt you to open Bottles and complete initial setup**.
+  
+      Once done, press X to close bottles, then select the script terminal window and enter anything to continue
+  
+  - **3.5** When prompted, press `OK` on the small pop up screens.
+  
+    You may have a couple of small pop up windows saying ".dll registered succesfully".
+  
+    Simply press `OK`, or hit enter to continue.
+  
+  - **3.6.** The script will return to the action selection screen, at this point the bottle is set up and you can launch ModOrganizer from the StalkerGAMMA bottle in Bottles to start playing the game.
 
 ## Step 4 - Troubleshooting
 
