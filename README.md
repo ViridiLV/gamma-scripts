@@ -80,13 +80,15 @@ The setup script aims to streamline this  process by scripting the set up of fla
   
   - **3.2** If you don't have flatpak bottles installed, the script will attempt to install flatpak bottles.
   
-  It will ask permission to do so, simply type `y` and hit enter to allow the installation of Bottles.
+      It will ask permission to do so, simply type `y` and hit enter to allow the installation of Bottles.
   
   - **3.3.** If Bottles does not have `filesystem=host` access, it may prompt you to input sudo password. 
   
     Not having flatpak permission acess to game files may cause missing QT.dll errors later.
   
   - **3.4** Then, if the bottles just got installed and was not installed and set up previously, the script will **prompt you to open Bottles and complete initial setup**.
+    <img width="661" height="121" alt="image" src="https://github.com/ViridiLV/gamma-scripts/blob/main/Documentation/Pictures/setup_bottles_ilustration.png" />
+
   
       Once done, press X to close bottles, then select the script terminal window and enter anything to continue
   
