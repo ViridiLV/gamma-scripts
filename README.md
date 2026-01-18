@@ -9,43 +9,45 @@ Includes a step-by-step guide.
 
 For scripts to work need libraries/packages that it uses.
 
-For Ubuntu/Debian systems:
+- **For Ubuntu/Debian systems:**
 ```
 apt install flatpak wget tar
 ```
 
 For Others... *to be included*
+
 ## Step 1 - getting the scripts
 
 Scripts are maintained in a rolling release manner, meaning you get them straight from the github repo.
 Version numbers inside the scripts are informative for troubleshooting logs.
 
-1.1 Open a terminal instance in the main directory where your gamma and anomaly files will be.
+- **1.1** Open a terminal instance in the main directory where your gamma and anomaly files will be.
 
-Make a folder and `cd` into it in your terminal.
+Tehn make a folder and `cd` into it in your terminal.
 
 For example:
 ```
 cd /home/$USER/Games/GAMMA
 ```
-1.2. Download the script file:
+- **1.2.** Download the script file:
 
 ```
 wget https://raw.githubusercontent.com/ViridiLV/gamma-scripts/refs/heads/main/gamma-scripts.sh
 ```
 
-1.3. Make it executable(optional if you choose to execute from already open terminal)
+- **1.3.** Make it executable(this is optional if you choose to execute from already open terminal)
 
 ```
 chmod -x gamma-scripts.sh
 ```
-1.4. Run the script
+- **1.4.** Run the script
 
- a) 
- ```
- bash gamma-scripts.sh
- ```
- b) via "Open in  terminal" of your distro's GUI file manager right click/open menu
+  - **a)** 
+  ```
+  bash gamma-scripts.sh
+  ```
+  - **b)** via "Open in  terminal" of your distro's GUI file manager right click/open menu
+    
 ## Step 2 - Installing the game
 
  - **INSTALL** - to install the game, type in the number that corresponds the option "Install game", then press Enter.
@@ -85,5 +87,7 @@ Simply press OK, or hit enter to continue.
 3.6. The script will return to the action selection screen, at this point the bottle is set up and you can launch ModOrganizer from the StalkerGAMMA bottle in bottles to start playing the game.
 
 ## Step 4 - Troubleshooting
+
+The `logs` folder contains a log file of the terminal output.
 
 ***Work in progress***
