@@ -318,7 +318,7 @@ log() {
         green)  color="\033[32m"; shift ;;
         yellow) color="\033[33m"; shift ;;
         blue)   color="\033[34m"; shift ;;
-        magenta)color="\033[35m"; shift ;;
+        magenta) color="\033[35m"; shift ;;
         cyan)   color="\033[36m"; shift ;;
     esac
     message="[$(date '+%Y-%m-%d %H:%M:%S')] $*"
